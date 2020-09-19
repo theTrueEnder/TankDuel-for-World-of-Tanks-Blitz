@@ -30,8 +30,8 @@ tank2stats = [tank_2_name, tank_2_hp, tank_2_damage, tank_2_reload_time, tank_2_
 
 class duel():
     def __init__(self):
-        adr_cooldown = 75
-
+        self.adr_cooldown = 75
+        self.adr_duration = -15
         self.t1_name, self.t2_name = tank1stats[0], tank2stats[0]
         self.t1_hp, self.t2_hp = tank1stats[1], tank2stats[1]
         self.t1_dmg, self.t2_dmg = tank1stats[2], tank2stats[2]
@@ -42,7 +42,7 @@ class duel():
         self.t1_active, self.t2_active = self.t1_rld, self.t2_rld      #active reload countdowns
 
         self.t1_adr_x, self.t2_adr_x = 1, 1   #tank1's adrenaline multiplier
-        self.t1_adr_cool, self.t2_adr_cool = adr_cooldown, adr_cooldown     #adrenaline cooldown
+        self.t1_adr_cool, self.t2_adr_cool = 0, 0     #adrenaline cooldown
 
         self.run_sim()
 
@@ -74,16 +74,7 @@ class duel():
             return True
 
     def run_sim(self):
-        if self.t1_adr:
-            self.t1_adr_x = 1.2
-        else:
-            self.t1_adr_x = 1
-        if self.t2_adr:
-            self.t2_adr_x = 1.2
-        else:
-            self.t2_adr_x = 1
-
-        print('Begin Simulation:', self.t1_name, 'vs', self.t2_name)
+        print(self.t1_name, 'vs', self.t2_name)
         self.tank1_fire()
         self.time += .001
         self.tank2_fire()
@@ -92,6 +83,20 @@ class duel():
             self.time += .001
             self.t1_adr_cool -= 0.001
             self.t2_adr_cool -= 0.001
+
+            if self.t1_adr_cool < -15
+                self.t1_adr_cool = 75
+            if self.t2_adr_cool < -15
+                self.t2_adr_cool = 75
+
+            if self.t1_adr and self.t1_adr_cool <= 0:
+                self.t1_adr_x = 1.2
+            else:
+                self.t1_adr_x = 1
+            if self.t2_adr and self.t2_adr_cool:
+                self.t2_adr_x = 1.2
+            else:
+                self.t2_adr_x = 1
 
             self.t1_active, self.t2_active = self.t1_active - (.001 * self.t1_adr_x), self.t2_active - (.001 * self.t2_adr_x)
             if self.t1_active <= 0:
