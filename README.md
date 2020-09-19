@@ -3,7 +3,9 @@ TankDuel is a text-based 1v1 duel simulator for WOTB! You simply input the stati
 
 ## - How to use:
 Near the beginning of the code (usually in the first 10-20 lines), there's an area for you to enter the stats of the duelling tanks. 
-<Picture>
+
+![ExampleCode](/Misc/Example1.png)
+
 An easy way to obtain the information of some tanks is through https://blitzhangar.com. Once it's all in, just run the code! The results will display in your IDE console. 
 
 ## - Future features:
